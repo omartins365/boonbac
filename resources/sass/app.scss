@@ -1,0 +1,41 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+//@import "~bootswatch/dist/darkly/variables";
+@import "~bootstrap/scss/bootstrap";
+//@import "~bootswatch/dist/darkly/bootswatch";
+
+//@include color-mode() {
+//    :root {
+//        --main-theme-color: $main-theme-color;
+//    }
+//}
+:root, [data-bs-theme="light"] {
+    --main-theme-color: #{$main-theme-color};
+    --main-theme-color2: #{$main-theme-color2};
+    --main-bg: #f6f9ff;
+}
+
+$main-theme-color-dark: tint-color($main-theme-color,60%) !default;
+$main-theme-color-dark2: tint-color($main-theme-color2,90%) !default;
+[data-bs-theme="dark"] {
+    --main-theme-color: #{$main-theme-color-dark};
+    --main-theme-color2: #{$main-theme-color-dark2};
+    //--main-bg: #{ var(--bs-card-bg) };
+}
+
+//font awesome
+@import '~@fortawesome/fontawesome-free/css/fontawesome';
+@import '~@fortawesome/fontawesome-free/css/regular';
+@import '~@fortawesome/fontawesome-free/css/solid';
+@import '~@fortawesome/fontawesome-free/css/brands';
+
+//app
+@import '../css/app';
+@import '../css/media-loader';
+
+@import 'intl-tel-input/build/css/intlTelInput.css';

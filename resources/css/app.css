@@ -1,0 +1,10 @@
+
+.message-box {
+    position: fixed;
+    top: 40px;
+    width: 80%;
+    z-index: 2000;
+    box-sizing: border-box;
+}
+
+.iti { width: 100%; }
