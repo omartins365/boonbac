@@ -39,12 +39,8 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-//        dd(routeIsCustomer());
-        if (routeIsMain()){
             $this->middleware('auth');
-        } else {
-            $this->middleware('auth:customer');
-        }
+
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
@@ -59,40 +55,11 @@ class VerificationController extends Controller
     {
         return $request->user()->hasVerifiedEmail()
             ? redirect($this->redirectPath())
-            : view(routeIsCustomer()?'customer.auth.verify':'auth.verify');
+            : view('auth.verify');
     }
     public function verified(Request $request)
     {
         alertSuccess('Email has been verified');
-        return redirect(routeIsCustomer()?route('customer.dashboard.home'):$this->redirectPath());
+        return redirect($this->redirectPath());
     }
-
-//    public function verify(Request $request)
-//    {dd($request);
-//        if (! hash_equals((string) $request->route('id'), (string) $request->user()->getKey())) {
-//            throw new AuthorizationException;
-//        }
-//
-//        if (! hash_equals((string) $request->route('hash'), sha1($request->user()->getEmailForVerification()))) {
-//            throw new AuthorizationException;
-//        }
-//
-//        if ($request->user()->hasVerifiedEmail()) {
-//            return $request->wantsJson()
-//                ? new JsonResponse([], 204)
-//                : redirect($this->redirectPath());
-//        }
-//
-//        if ($request->user()->markEmailAsVerified()) {
-//            event(new Verified($request->user()));
-//        }
-//
-//        if ($response = $this->verified($request)) {
-//            return $response;
-//        }
-//
-//        return $request->wantsJson()
-//            ? new JsonResponse([], 204)
-//            : redirect($this->redirectPath())->with('verified', true);
-//    }
 }

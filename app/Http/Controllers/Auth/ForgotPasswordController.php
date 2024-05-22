@@ -24,9 +24,6 @@ class ForgotPasswordController extends Controller
 
     public function showLinkRequestForm()
     {
-        if (routeIsCustomer()) {
-            return view('customer.auth.passwords.email');
-        }
         return  view('auth.passwords.email');
     }
 
@@ -35,9 +32,5 @@ class ForgotPasswordController extends Controller
      *
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
-    public function broker()
-    {
 
-        return routeIsCustomer()?Password::broker('customers'):Password::broker('users');
-    }
 }

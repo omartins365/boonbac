@@ -33,15 +33,13 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    function customerOrUser(String $token = ''){
-        return redirect()->route(routeIsCustomer()?'customer.password.reset':'main.password.reset',['token'=>$token ]);
-    }
+
 
     public function showResetForm(Request $request)
     {
         $token = $request->route()->parameter('token');
 
-        return view(routeIsCustomer()?'customer.auth.passwords.reset':'auth.passwords.reset')->with(
+        return view('auth.passwords.reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }
@@ -78,15 +76,4 @@ class ResetPasswordController extends Controller
             ->withErrors(['email' => trans($response)]);
     }
 
-
-    public function broker()
-    {
-        return routeIsCustomer()?Password::broker('customers'):Password::broker('users');
-    }
-
-
-    protected function guard()
-    {
-        return routeIsCustomer()?Auth::guard('customer'):Auth::guard();
-    }
 }

@@ -26,15 +26,10 @@ class UsersRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore(auth()->id())],
-            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'permission' => ['nullable'],
-            'wa_phone' => ['nullable'],
-            'brand_name' => ['nullable', 'string', 'min:3', 'max:20'],
-            'phone' => ['nullable'],
-            'dp' => ['image', 'required_with:save-photo'],
+            'username' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'gender' => ['required', 'in:male,female'],
         ];
     }
 }
