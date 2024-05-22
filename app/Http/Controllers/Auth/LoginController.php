@@ -41,17 +41,15 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-
-        $this->middleware('guest:customer')->except('logout');
     }
 
     /**
      * Show the application's login form.
      *
      * @return \Illuminate\View\View customer     */
-    public function showLoginForm(Customer $customer)
+    public function showLoginForm()
     {
-        return view((routeIsCustomer())?'customer.auth.login':'auth.login', ['customer'=>$customer]);
+        return view('auth.login');
     }
     /**
      * Handle a login request to the application.
@@ -69,30 +67,25 @@ class LoginController extends Controller
         // the login attempts for this application. We'll key this by the username and
         // the IP address of the client making these requests into this application.
         if (method_exists($this, 'hasTooManyLoginAttempts') &&
-            $this->hasTooManyLoginAttempts($request)) {
+            $this->hasTooManyLoginAttempts($request))
+        {
             $this->fireLockoutEvent($request);
 
             return $this->sendLockoutResponse($request);
         }
 
-        if (!routeIsCustomer()){
-                if ($this->attemptLogin($request)) {
-                    if ($request->hasSession()) {
-                        $request->session()->put('auth.password_confirmed_at', time());
-                    }
 
-                    return $this->sendLoginResponse($request);
-                }
-        }else {
-
-            if ($this->attemptCustomerLogin($request)) {
-                if ($request->hasSession()) {
-                    $request->session()->put('customer.auth.password_confirmed_at', time());
-                }
-
-                return $this->sendLoginResponse($request);
+        if ($this->attemptLogin($request))
+        {
+            if ($request->hasSession())
+            {
+                $request->session()->put('auth.password_confirmed_at', time());
             }
+
+            return $this->sendLoginResponse($request);
         }
+
+
         // If the login attempt was unsuccessful we will increment the number of attempts
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
@@ -100,35 +93,14 @@ class LoginController extends Controller
 
         return $this->sendFailedLoginResponse($request);
     }
-//    public function redirectPath()
+    //    public function redirectPath()
 //    {
 //        return routeIsMain()? route('main.dash.index'): route('customer.dashboard.home');
 //    }
 
-    public function attemptCustomerLogin(Request $request){
-        return Auth::guard('customer')->attempt(
-            $this->credentials($request), $request->boolean('remember')
-        );
-    }
 
-    // public function showCustomerLoginForm()
-    // {
-    //     return view('customer.auth.login', ['url' => route('customer.login-view'), 'title'=>'Customer']);
-    // }
 
-    public function customerLogin(Request $request)
-    {
-        $this->validate($request, [
-            'email'   => 'required|email',
-            'password' => 'required|min:6'
-        ]);
 
-        if (Auth::guard('customer')->attempt($request->only(['email','password']), $request->get('remember'))){
-            return redirect()->intended(route('customer.dashboard.home'));
-        }
-
-        return back()->withInput($request->only('email', 'remember'));
-    }
 
 
     /**
@@ -140,13 +112,14 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
 
-        Auth::guard(routeIsCustomer()?'customer':null)->logout();
+        Auth::guard()->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
-        if ($response = $this->loggedOut($request)) {
+        if ($response = $this->loggedOut($request))
+        {
             return $response;
         }
 
@@ -157,6 +130,6 @@ class LoginController extends Controller
 
     protected function guard()
     {
-        return routeIsCustomer()?Auth::guard('customer'):Auth::guard();
+        return Auth::guard();
     }
 }
