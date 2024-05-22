@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Base\HasDp;
+use App\Base\TimeLapse;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\File;
 use Illuminate\Notifications\Notifiable;
@@ -15,13 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasDp;
-
-    const DP_DIR = "public/images/profile/";
-    const DP_DIR_PUB = "images/profile/";
-
-    static public string $DP_DIR = "public/images/profile/";
-    static public string $DP_DIR_PUB = "images/profile/";
+    use HasApiTokens, HasFactory, Notifiable, TimeLapse;
 
     /**
      * The model's default values for attributes.
@@ -29,9 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $attributes = [
-        // 'permission' => '{"manage_users":false,
-        //     "manage_pid":false,
-        //     "manage_type":false,}',
+
     ];
 
     /**
@@ -40,14 +33,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'brand_name',
-        'rank',
-        'permission',
+        'username',
         'email',
-        'phone',
-        'wa_phone',
+        'gender',
         'password',
     ];
 
@@ -68,33 +56,13 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'permission' => 'array'
     ];
 
     public function name(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => $attributes["last_name"] . " " . $attributes["first_name"],
+            get: fn ($value, $attributes) => $attributes["username"] ,
         );
     }
-
-
-    /**
-     * Get all of the bookings for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-
-
-    /**
-     * Get all of the images for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function images(): HasMany
-    {
-        return $this->hasMany(Media::class, 'user_id', 'id');
-    }
-
 
 }
