@@ -111,7 +111,7 @@ class Core
 
         $canonical = $config['canonical'] ?? request()->fullUrl();
         // if (isset($property)) {
-        $desc = Setting::for('about-us');
+        $desc = '';
         $og_image_alt = config('app.name');
         // }
 

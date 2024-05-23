@@ -25,12 +25,10 @@ extract(Core::meta_var(get_defined_vars()));
     <meta name="description" content="{{ $h_desc ?? '' }}">
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="{{ config('app.name', 'CG') }}" />
-    <meta property="article:publisher" content="{{ Setting::for('facebook') }}" />
     <meta property="twitter:title" content='{{ $og_title }}'' />
     <meta property="twitter:url" content="{{ $og_url }}" />
     <meta property="twitter:description" content="{{ $og_desc }}" />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:site" content="{{ Setting::for('twitter') }}" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

@@ -2,9 +2,9 @@
 $err_msg = "";
 //include other errors in alert display
 if ($errors->any()) {
-    Core::add_message($err_msg,ALERT_WARNING,"Couldn't complete request");
+    // alertDanger($err_msg,"Couldn't complete request");
      foreach ($errors->all() as $error) {
-        Core::add_message($error,ALERT_DANGER);
+        alertDanger($error);
      }
 }
 

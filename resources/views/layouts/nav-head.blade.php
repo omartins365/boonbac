@@ -14,7 +14,7 @@
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ms-auto fs-6">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('main.index') }}">
+                <a class="nav-link" href="{{ route('home') }}">
                     <i class="fas fa-home"></i>
                     <span
                         class="d-md-none d-lg-inline">{{ __('Home') }}</span></a>
@@ -22,19 +22,15 @@
 
             <!-- Authentication Links -->
             @guest
-                @if (Route::has('main.login'))
+                @if (Route::has('login'))
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('main.login') }}">
+                        <a class="nav-link" href="{{ route('login') }}">
                             <i class="fas fa-sign-in"></i> <span class="d-md-none d-lg-inline"> {{ __('Login') }}
                             </span></a>
                     </li>
                 @endif
             @else
-                @if (!request()->routeIs('dash.*') && !request()->routeIs('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('main.dash.home') }}">{{ __('Dashboard') }}</a>
-                    </li>
-                @endif
+
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -43,15 +39,13 @@
 
                     <div class="dropdown-menu dropdown-menu-end" style="z-index: 1050" aria-labelledby="navbarDropdown">
 
-                        <a class="dropdown-item" href="{{ route('main.dash.staffs.edit', ['user' => auth()->id()]) }}"><i
-                                class="fas fa-user-pen"></i> {{ __('Edit Profile') }}</a>
-                        <a class="dropdown-item" href="{{ route('main.logout') }}"
+                       <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
-                        <form id="logout-form" action="{{ route('main.logout') }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </div>
