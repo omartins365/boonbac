@@ -1,16 +1,15 @@
 @extends('layouts.grid')
 
 @section('main')
-    {{--  <x-wa_agent_modal :brand="$brand" :agent="$agent" :was_msg="$was_msg" :wa_phone="$wa_phone" />
-    <x-call_agent_modal :brand="$brand" :phone="$phone" />  --}}
     <div class="container mt-5">
 
         <div class="card mb-3 p-3 p-lg-5 text-center">
             <h1 class="fs-1 my-2 lead card-title pt-3 text-uppercase">
                <i class="fas fa-home"></i> Home
             </h1>
-        </div>
 
+            <p>Something spectacular would have been here if I had just a little more time, anyways welcome to the homepage {{auth()->user()->name??'User'}} </p>
+        </div>
 
     </div>
 @endsection
