@@ -1,7 +1,7 @@
 <?php
+use App\Http\Controllers\Auth\OAuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +13,7 @@ use App\Http\Controllers\HomeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//run artisan route:list to confirm endpoints
 Auth::routes();// other auth routes (e.g. register, logout , e.t.c...) already defined by default and matches assessment requirements
 
 Route::get( '/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
@@ -26,4 +26,7 @@ Route::middleware(['auth'])->group(function ()
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
-Route::get('/offline', [HomeController::class, 'offline'])->name('offline');
+
+
+        Route::get('oauth/{driver}', [OAuthController::class, 'redirectToAuthProvider'])->name('oauth.init');
+        Route::get('oauth/{driver}/callback', [OAuthController::class, 'handleAuthProviderCallback'])->name('oauth.callback');

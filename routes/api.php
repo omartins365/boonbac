@@ -15,15 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware(['auth:sanctum'])->prefix('v1')->group(function ()
+Route::prefix('v1')->group(function ()
 {
+    Auth::routes();// other auth routes (e.g. register, logout , e.t.c...) already defined by default and matches assessment requirements
+
+    Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+
     //initial test endpoint
-    Route::get('/hello', function ($id)
+    Route::get('/hello', function ()
     {
         return apiSuccess(message: "Hello World");
     });
 
-    Route::get('/', function (Request $request)
+    Route::middleware(['auth:sanctum'])->get('/user', function (Request $request)
     {
         return $request->user();
     });

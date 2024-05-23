@@ -81,7 +81,6 @@ class LoginController extends Controller
             {
                 $request->session()->put('auth.password_confirmed_at', time());
             }
-
             return $this->sendLoginResponse($request);
         }
 
@@ -92,6 +91,27 @@ class LoginController extends Controller
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
+    }
+
+
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+
+        if ($response = $this->authenticated($request, $this->guard()->user()))
+        {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? apiSuccess([
+                ...$request->user->toArray(),
+                'api_key' =>
+                $request->user->createToken('User')->plainTextToken, //send api key back with other user info
+            ], 204)
+            : redirect()->intended($this->redirectPath());
     }
 
     public function username()

@@ -12,8 +12,8 @@
                     <div class="col-12">
                         <p class="card-title text-start ">If you don't have an account, you can <a href="{{route('register')}}">Register here!</a></p></div>
                         <div class="col-12">
-                            <button class="btn btn-secondary">G</button>
-                        <button class="float-end btn">F</button></div>
+<x-social_login_btns />
+                    </div>
                     </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
