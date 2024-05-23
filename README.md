@@ -18,9 +18,6 @@ This project represents a complete submission for the KPIE assessment, demonstra
 * Laravel Socialite ^5.6.1 (Social login functionality)
 * Laravel Tinker ^2.8.1 (REPL for interactive PHP)
 * Laravel UI ^4.2.1 (Blade UI components)
-* Propaganistas/Laravel-Phone ^5.0.3 (Phone number handling)
-
-**Note:** I've added a brief explanation in parentheses for some of the less common libraries. You can adjust these explanations or remove them entirely depending on your preference.
 
 
 ### Installation
@@ -65,13 +62,7 @@ cp .env.example .env
 php artisan migrate
 ```
 
-7. Seed the database (if applicable):
-
-```bash
-php artisan db:seed
-```
-
-8. Start the development server:
+7. Start the development server:
 
 ```bash
 php artisan serve
@@ -79,15 +70,6 @@ php artisan serve
 
 This will launch the application on `http://localhost:8000` by default.
 
-### Testing
-
-The project incorporates unit and feature tests written with PHPUnit.
-
-To execute the tests:
-
-```bash
-vendor/bin/phpunit
-```
 
 ### Code Structure
 
