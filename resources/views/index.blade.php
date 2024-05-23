@@ -1,6 +1,6 @@
 @extends('layouts.grid')
 
-@section('content')
+@section('main')
     {{--  <x-wa_agent_modal :brand="$brand" :agent="$agent" :was_msg="$was_msg" :wa_phone="$wa_phone" />
     <x-call_agent_modal :brand="$brand" :phone="$phone" />  --}}
     <div class="container mt-5">
