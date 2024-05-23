@@ -93,14 +93,11 @@ class RegisterController extends Controller {
 
         $user = $this->create($data);
 
-       event(new Registered($user));
-        $this->guard()->login($user);
+       event(new Registered($user)); //trigger event that sends verify mail to new user
 
-        // if ($response = $this->registered($request, $user)) {
-        //     return dd($response);
-        // }
+        // $this->guard()->login($user); auto login is possible here but boonbac.com did not follow this
+
         if (! $user->exists) {
-            // dd($user);
 
             alertDanger("account could not be created", "Error");
             return redirect()->back()->withInput()->withErrors("Could not create user");
@@ -124,9 +121,5 @@ class RegisterController extends Controller {
     public function showRegistrationForm()
     {
         return 'auth.register';
-    }
-    protected function guard()
-    {
-        return Auth::guard();
     }
 }

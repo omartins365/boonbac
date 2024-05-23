@@ -14,7 +14,12 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Auth::routes();
+Route::get( '/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+
+Route::get('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+
+Auth::routes(); // other auth routes (e.g. register, logout , e.t.c...) already defined by default and matches assessment requirements
 
 Route::middleware(['auth'])->group(function ()
 {
