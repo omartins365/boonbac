@@ -1,64 +1,111 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Boonbac - KPIE Assessment Project (Completed)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project represents a complete submission for the KPIE assessment, demonstrating proficiency in both frontend and backend development. It leverages the Laravel framework to construct a web application boasting a comprehensive user interface and robust backend logic.
 
-## About Laravel
+### Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* **User Authentication:** Streamlined Login, Registration, and Forgot Password functionalities.
+* **Secure Backend:** Implements industry-standard security practices to safeguard against vulnerabilities.
+* **Intuitive User Interface:** Fully functional user interfaces for Login, Register, Forgot Password, and Home pages meticulously replicate the visual styles of the provided links, achieving a high degree of fidelity.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Technologies Used
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* PHP ^8.1
+* Laravel ^11.0
+* Doctrine/DBAL ^3.6.2 (Database abstraction layer)
+* GuzzleHTTP/Guzzle ^7.5.1 (HTTP client)
+* Laravel Sanctum ^4.0 (API authentication)
+* Laravel Socialite ^5.6.1 (Social login functionality)
+* Laravel Tinker ^2.8.1 (REPL for interactive PHP)
+* Laravel UI ^4.2.1 (Blade UI components)
+* Propaganistas/Laravel-Phone ^5.0.3 (Phone number handling)
 
-## Learning Laravel
+**Note:** I've added a brief explanation in parentheses for some of the less common libraries. You can adjust these explanations or remove them entirely depending on your preference.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Installation
 
-## Laravel Sponsors
+1. Clone the repository:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+git clone https://github.com/omartins365/boonbac.git
+```
 
-### Premium Partners
+2. Navigate to the project directory:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+```bash
+cd boonbac
+```
 
-## Contributing
+3. Install dependencies:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+```
 
-## Code of Conduct
+4. Generate an application key:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+5. Create a `.env` file by copying the `.env.example` file:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+   This file stores environment variables like database credentials.
 
-## License
+```bash
+cp .env.example .env
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   **Make sure to update the `.env` file with your own credentials.**
+
+6. Migrate the database (if applicable):
+
+```bash
+php artisan migrate
+```
+
+7. Seed the database (if applicable):
+
+```bash
+php artisan db:seed
+```
+
+8. Start the development server:
+
+```bash
+php artisan serve
+```
+
+This will launch the application on `http://localhost:8000` by default.
+
+### Testing
+
+The project incorporates unit and feature tests written with PHPUnit.
+
+To execute the tests:
+
+```bash
+vendor/bin/phpunit
+```
+
+### Code Structure
+
+The project adheres to a PSR-4 autoloading structure. The core application code resides in the `app` directory.
+
+* `app/Base` - Contains foundational elements like enums and helper functions.
+* `app/Http` - Houses controllers for handling HTTP requests.
+* `config` - Stores configuration files for the application.
+* `database` - Contains database migrations and seeders.
+* `resources` - Holds views, assets, and other resources.
+* `routes` - Defines application routes.
+* `tests` - Includes unit and feature tests for the application.
+
+### Contributing
+
+Currently, this project serves assessment purposes only.
+
+**Note:**
+
+* The user interface, while fully functional, might exhibit slight discrepancies compared to the reference links due to the time constraint. 
+* The social sign in options will not work if the relevant credentials are not included in the env file 
