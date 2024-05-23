@@ -1,6 +1,6 @@
 @extends('layouts.html')
 @section('body')
-<div id="app" class="mb-5 pb-5" style="
+<div id="app" class="" style="
     min-height: calc(100vh - 68.05px - 65.33px);
     background-image: url('{{asset("images/asset/background.png")}}')
 ">

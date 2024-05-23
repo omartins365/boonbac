@@ -118,7 +118,7 @@ if (! function_exists('addMessage'))
     if (! function_exists('alertDanger'))
     {
 
-        function alertDanger(string $msg, string $heading = null)
+        function alertDanger(string $msg, string $heading = "Error")
         {
             return addMessage($msg, BSAlert::DANGER, $heading ?? ucfirst(strtolower(BSAlert::DANGER->name)));
         }
