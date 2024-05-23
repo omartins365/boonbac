@@ -5,20 +5,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-            <h2 class="display-5 mx-auto p-2">{{ routeIsMain()?config('app.name')." Staff":config('app.name') }}</h2>
+            <h2 class="display-5 mx-auto p-2">{{ config('app.name') }}</h2>
                 <div class="card-title text-center display-5 p-3"> <i class="fas fa-user"></i> {{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ loginRoute() }}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
 
-                                @error('email')
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
