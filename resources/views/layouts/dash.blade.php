@@ -18,5 +18,4 @@
             </div>
         </div>
     </div>
-    <x-confirm_tx_modal />
 @endsection

@@ -45,7 +45,7 @@ class RegisterController extends Controller {
      */
     public function __construct()
     {
-        $this->middleware(['guest:customer']);
+        $this->middleware(['guest']);
     }
 
     /**
@@ -73,7 +73,7 @@ class RegisterController extends Controller {
     protected function create(array $data)
     {
         return User::create([
-            'Username' => $data['username'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'gender' => $data['gender'],
@@ -113,13 +113,5 @@ class RegisterController extends Controller {
             ? new JsonResponse([], 201)
             : redirect()->back();
     }
-    /**
-     * Show the application registration form.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function showRegistrationForm()
-    {
-        return 'auth.register';
-    }
+
 }

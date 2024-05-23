@@ -93,13 +93,11 @@ class LoginController extends Controller
 
         return $this->sendFailedLoginResponse($request);
     }
-    //    public function redirectPath()
-//    {
-//        return routeIsMain()? route('main.dash.index'): route('customer.dashboard.home');
-//    }
 
-
-
+    public function username()
+    {
+        return 'username';//'email';
+    }
 
 
 

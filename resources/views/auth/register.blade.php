@@ -3,7 +3,7 @@
   $route = route('register');
   $method = 'POST';
 @endphp
-@extends('layouts.dash')
+@extends('layouts.app')
 @section('content')
   <div class="container">
     <div class="justify-content-center">
@@ -29,7 +29,6 @@
 
               <input type="hidden" name="type" value="staff">
               <div class="row">
-                < class="col-md">
                   <div class="row mb-3">
                     <label for="username"
                       class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
@@ -93,7 +92,24 @@
                         {{ isset($user) ? '' : 'required' }}>
                     </div>
                   </div>
+<div class="row mb-3">
+                            <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
 
+                            <div class="col-md-6">
+                                <select id="gender"  class="form-select @error('gender') is-invalid @enderror"
+                                    name="gender" required>
+                                <option value">Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                </select>
+
+                                @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
                   <div class="row mb-3">
                     <div class="col-md-6 offset-md-4 text-md-end">
                       <button type="submit" class="btn btn-primary">
