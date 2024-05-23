@@ -65,4 +65,8 @@ class User extends Authenticatable
         );
     }
 
+    public function username()
+    {
+        return 'username';//'email';
+    }
 }
