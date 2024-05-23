@@ -3,58 +3,51 @@
   $route = route('register');
   $method = 'POST';
 @endphp
-@extends('layouts.app')
-@section('content')
-  <div class="container">
+@extends('layouts.grid')
+@section('main')
+  <div class="">
     <div class="justify-content-center">
       <div class="">
-        <div class="card p-3">
-          <div class="card-title display-5 text-center">
-            @isset($user)
-              @if ($user->id === auth()->id())
-                <i class="fas fa-user-pen"></i> {{ __('Edit Profile') }}
-              @else
-                <i class="fas fa-user-pen"></i> {{ __('Edit ' . $user_label . ' Account') }}
-              @endif
-            @else
-              <i class="fas fa-user-plus"></i> {{ __('New ' . $user_label . ' Account') }}
-            @endisset
+        <div class="card rounded-5 p-5">
+          <div class="card-title display-5 text-start ps-3">
+            Register 🚀
           </div>
 
           <div class="card-body">
-            <form method="POST" @if (isset($user) && $user?->exists) enctype="multipart/form-data" @endif
+                    <div class="">
+                        <p class="text-start ">If you already have an account, you can <a href="{{route('login')}}">Login here!</a></p>
+
+                    </div>
+            <form method="POST"
               action="{{ $route }}">
               @csrf
               @method($method)
 
-              <input type="hidden" name="type" value="staff">
               <div class="row">
-                  <div class="row mb-3">
-                    <label for="username"
-                      class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
+                   <div class="col-12 mb-3">
+                            <label for="username"
+                                class="text-lg">{{ __('Username') }}</label>
 
-                    <div class="col-md-6">
-                      <input id="username" type="text"
-                        class="form-control @error('username') is-invalid @enderror"
-                        name="username" value="{{ old('username', $user->username ?? '') }}"
-                        required autocomplete="username" autofocus>
+                                <input id="username" type="username"
+                                    class="form-control form-control-lg @error('username') is-invalid @enderror" name="username"
+                                    placeholder="Username"
+                                    value="{{ old('username') }}" required autocomplete="username" autofocus />
 
-                      @error('username')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-                    </div>
-                  </div>
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
+                        </div>
                   {{-- @endisset --}}
-                  <div class="row mb-3">
+                  <div class="col-12 mb-3">
                     <label for="email"
-                      class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                      class="text-lg">{{ __('E-mail') }}</label>
 
-                    <div class="col-md-6">
-                      <input id="email" type="email"
-                        class="form-control @error('email') is-invalid @enderror" name="email"
+                    <div class="">
+                      <input id="email" type="email" placeholder="E-mail address"
+                        class="form-control form-control-lg @error('email') is-invalid @enderror" name="email"
                         value="{{ old('email', $user->email ?? '') }}" required autocomplete="email">
 
                       @error('email')
@@ -64,39 +57,40 @@
                       @enderror
                     </div>
                   </div>
+<div class="col-12 mb-3">
+                            <label for="password"
+                                class="">{{ __('Password') }}</label>
 
-                  <div class="row mb-3">
-                    <label for="password"
-                      class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
-                    <div class="col-md-6">
-                      <input id="password" type="password"
-                        class="form-control @error('password') is-invalid @enderror" name="password"
-                        autocomplete="new-password" {{ isset($user) ? '' : 'required' }}>
+                                <input id="password" type="password"
+                                    class="form-control form-control-lg @error('password') is-invalid @enderror" name="password"
+                                    placeholder="Password"
+                                    required autocomplete="current-password">
 
-                      @error('password')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                      @enderror
-                    </div>
-                  </div>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
 
-                  <div class="row mb-3">
+                        </div>
+
+                  <div class="col-12 mb-3">
                     <label for="password-confirm"
-                      class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+                      class="text-lg">{{ __('Confirm Password') }}</label>
 
-                    <div class="col-md-6">
-                      <input id="password-confirm" type="password" class="form-control"
+                    <div class="">
+                      <input id="password-confirm" type="password" class="form-control form-control-lg"
+                      placeholder="Confirm Password"
                         autocomplete="new-password" name="password_confirmation"
                         {{ isset($user) ? '' : 'required' }}>
                     </div>
                   </div>
-<div class="row mb-3">
-                            <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('Gender') }}</label>
+<div class="col-12 mb-3">
+                            <label for="gender" class="text-lg">{{ __('Gender') }}</label>
 
-                            <div class="col-md-6">
-                                <select id="gender"  class="form-select @error('gender') is-invalid @enderror"
+                            <div class="">
+                                <select id="gender"  class="form-select form-select-lg @error('gender') is-invalid @enderror"
                                     name="gender" required>
                                 <option value">Gender</option>
                                 <option value="male">Male</option>
@@ -111,9 +105,19 @@
                             </div>
                         </div>
                   <div class="row mb-3">
-                    <div class="col-md-6 offset-md-4 text-md-end">
-                      <button type="submit" class="btn btn-primary">
-                        {{ __(isset($user) ? 'Save Edit' : 'Create ' . $user_label . '') }}
+                     <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="terms" id="terms" value="1"
+                                        {{ old('terms') ? 'checked' : '' }} required>
+
+                                    <label class="form-check-label" for="terms">
+                                        By creating your account, you agree to our Terms of Use & Privacy Policy
+                                    </label>
+                                </div>
+                            </div>
+                    <div class="col-12 text-md-end">
+                      <button type="submit" class="btn btn-lg btn-primary float-end">
+                        Sign up
                       </button>
                     </div>
                   </div>
