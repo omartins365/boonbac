@@ -31,4 +31,17 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+
+    'facebook' => [
+        'client_id' => env('FACEBOOK_AUTH_APP_ID'),
+        'client_secret' => env('FACEBOOK_AUTH_APP_SECRET'),
+        'redirect' =>  '/oauth/facebook/callback',
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_AUTH_WEB_SERVER_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_AUTH_WEB_SERVER_CLIENT_SECRET'),
+        'redirect' =>  '/oauth/google/callback',
+    ],
+
 ];

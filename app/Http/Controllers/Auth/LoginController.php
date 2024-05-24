@@ -96,8 +96,9 @@ class LoginController extends Controller
 
     protected function sendLoginResponse(Request $request)
     {
+        if (!$request->wantsJson()){
         $request->session()->regenerate();
-
+        }
         $this->clearLoginAttempts($request);
 
         if ($response = $this->authenticated($request, $this->guard()->user()))
@@ -107,9 +108,9 @@ class LoginController extends Controller
 
         return $request->wantsJson()
             ? apiSuccess([
-                ...$request->user->toArray(),
+                ...auth()->user()?->toArray(),
                 'api_key' =>
-                $request->user->createToken('User')->plainTextToken, //send api key back with other user info
+                auth()->user()?->createToken('User')->plainTextToken, //send api key back with other user info
             ], 204)
             : redirect()->intended($this->redirectPath());
     }

@@ -57,7 +57,7 @@
                       @enderror
                     </div>
                   </div>
-<div class="col-12 mb-3">
+<div class="col-6 mb-3">
                             <label for="password"
                                 class="">{{ __('Password') }}</label>
 
@@ -75,7 +75,7 @@
 
                         </div>
 
-                  <div class="col-12 mb-3">
+                  <div class="col-6 mb-3">
                     <label for="password-confirm"
                       class="text-lg">{{ __('Confirm Password') }}</label>
 

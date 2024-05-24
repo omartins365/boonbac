@@ -110,7 +110,11 @@ class RegisterController extends Controller {
             alertSuccess("Account created! Please check your inbox/spam folder to complete your registration");
         }
         return $request->wantsJson()
-            ? new JsonResponse([], 201)
+            ? apiSuccess([
+                ...$user?->toArray(),
+                'api_key' =>
+                $user?->createToken('User')->plainTextToken, //send api key back with other user info
+            ], 201)
             : redirect()->back();
     }
 
