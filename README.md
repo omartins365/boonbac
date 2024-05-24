@@ -62,7 +62,7 @@ cp .env.example .env
 php artisan migrate
 ```
 
-7. Start the development server:
+7. Expose Public Storage
 
 ```bash
 php artisan storage:link
